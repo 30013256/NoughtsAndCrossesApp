@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="NoughtsAndCrossesApp.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NoughtsAndCrossesApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <TextBlock x:Name="txtBoxGameId" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Text="test"/>
+        <TextBlock x:Name="txtBoxP1A" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560,203,0,0"/>
+        <TextBlock x:Name="txtBoxP2A" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="871,247,0,0"/>
+        <TextBlock x:Name="txtBoxPlayersTurn" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560,253,0,0"/>
+        <Grid Height="555" Width="555" Margin="0,200" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="185"/>
+                <RowDefinition Height="185"/>
+                <RowDefinition Height="185"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="185"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSquare1" Grid.Row="0" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare1_Click"/>
+            <Button x:Name="btnSquare2" Grid.Row="0" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare2_Click"/>
+            <Button x:Name="btnSquare3" Grid.Row="0" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare3_Click"/>
+            <Button x:Name="btnSquare4" Grid.Row="1" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare4_Click"/>
+            <Button x:Name="btnSquare5" Grid.Row="1" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare5_Click"/>
+            <Button x:Name="btnSquare6" Grid.Row="1" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare6_Click"/>
+            <Button x:Name="btnSquare7" Grid.Row="2" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare7_Click"/>
+            <Button x:Name="btnSquare8" Grid.Row="2" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare8_Click"/>
+            <Button x:Name="btnSquare9" Grid.Row="2" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare9_Click"/>
+        </Grid>
+
+
+    </Grid>
+</Page>
