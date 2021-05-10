@@ -4,4 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:NoughtsAndCrossesApp">
 
+    <Application.Resources>
+        <ResourceDictionary Source="CustomButton.xaml"></ResourceDictionary>
+    </Application.Resources>
 </Application>
