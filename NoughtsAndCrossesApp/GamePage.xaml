@@ -7,33 +7,56 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <TextBlock x:Name="txtBoxGameId" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Text="test"/>
-        <TextBlock x:Name="txtBoxP1A" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560,203,0,0"/>
-        <TextBlock x:Name="txtBoxP2A" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="871,247,0,0"/>
-        <TextBlock x:Name="txtBoxPlayersTurn" Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="560,253,0,0"/>
-        <Grid Height="555" Width="555" Margin="0,200" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="185"/>
-                <RowDefinition Height="185"/>
-                <RowDefinition Height="185"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="185"/>
-                <ColumnDefinition Width="185"/>
-                <ColumnDefinition Width="185"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btnSquare1" Grid.Row="0" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare1_Click"/>
-            <Button x:Name="btnSquare2" Grid.Row="0" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare2_Click"/>
-            <Button x:Name="btnSquare3" Grid.Row="0" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare3_Click"/>
-            <Button x:Name="btnSquare4" Grid.Row="1" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare4_Click"/>
-            <Button x:Name="btnSquare5" Grid.Row="1" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare5_Click"/>
-            <Button x:Name="btnSquare6" Grid.Row="1" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare6_Click"/>
-            <Button x:Name="btnSquare7" Grid.Row="2" Grid.Column="0" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare7_Click"/>
-            <Button x:Name="btnSquare8" Grid.Row="2" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare8_Click"/>
-            <Button x:Name="btnSquare9" Grid.Row="2" Grid.Column="2" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare9_Click"/>
-        </Grid>
-
-
+    <Grid Background="#393939">
+        <StackPanel Margin="30,50,10,0" >
+            <TextBlock x:Name="txtBoxGameId" Text="Game: 3492" FontSize="50" Foreground="#e3e3e3" FontWeight="SemiBold"/>
+            <Grid  HorizontalAlignment="Left" Width="560">
+                <TextBlock x:Name="txtBlockP1" Text="Player1" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Left"/>
+                <TextBlock Text="vs" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtBlockP2" Text="Player2" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid  HorizontalAlignment="Left" Width="560">
+                <TextBlock x:Name="txtBlockP1Score" Text="0" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Left"/>
+                <TextBlock Text="-" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtBlockP2Score" Text="0" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+            </Grid>
+            <Grid Height="560" Width="560" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Grid Background="#3DF31C" Grid.Row="0" Grid.ColumnSpan="7"/>
+                <Grid Background="#3DF31C" Grid.Row="2" Grid.ColumnSpan="7"/>
+                <Grid Background="#3DF31C" Grid.Row="4" Grid.ColumnSpan="7"/>
+                <Grid Background="#3DF31C" Grid.Row="6" Grid.ColumnSpan="7"/>
+                <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="0"/>
+                <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="2"/>
+                <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="4"/>
+                <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="6"/>
+                <Button x:Name="btnSquare1" Grid.Row="1" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare1_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare2" Grid.Row="1" Grid.Column="3" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare2_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare3" Grid.Row="1" Grid.Column="5" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare3_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare4" Grid.Row="3" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare4_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare5" Grid.Row="3" Grid.Column="3" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare5_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare6" Grid.Row="3" Grid.Column="5" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare6_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare7" Grid.Row="5" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare7_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare8" Grid.Row="5" Grid.Column="3" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare8_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+                <Button x:Name="btnSquare9" Grid.Row="5" Grid.Column="5" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare9_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

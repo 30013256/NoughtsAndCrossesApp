@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,7 +25,18 @@ namespace NoughtsAndCrossesApp
     {
         public MainPage()
         {
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = false;
             this.InitializeComponent();
+            var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
+            appView.TitleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+            appView.TitleBar.InactiveBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+            appView.TitleBar.ButtonBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+            appView.TitleBar.ButtonHoverBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 150, 243, 130);
+            appView.TitleBar.ButtonPressedBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+            appView.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+
+            ContentContainer.Navigate(typeof(HomePage));
         }
 
         private void BtnTogglePane_Click(object sender, RoutedEventArgs e)
@@ -37,6 +49,14 @@ namespace NoughtsAndCrossesApp
             ContentContainer.Navigate(typeof(MultiplayerPage));
         }
 
-        
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            ContentContainer.Navigate(typeof(HomePage));
+        }
+
+        private void btnSingleplayer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

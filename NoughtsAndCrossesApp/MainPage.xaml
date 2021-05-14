@@ -5,35 +5,40 @@
     xmlns:local="using:NoughtsAndCrossesApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="#FFFFDFC5">
+    mc:Ignorable="d" Background="#393939">
 
     <Grid>
-        <SplitView x:Name="SplitViewMP" IsPaneOpen="False" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactOverlay" PaneBackground="#FFFF5D00">
+        <SplitView x:Name="SplitViewMP" IsPaneOpen="True" OpenPaneLength="180" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="#3DF31C">
             <SplitView.Pane>
                 <StackPanel>
-                    <Button x:Name="btnTagglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Background="#00B6B6B6">
+                    <Button x:Name="btnTagglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Background="#0000" Foreground="#393939">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="GlobalNavigationButton"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnHome" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Background="#00D10000">
+                    <Button x:Name="btnHome" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Background="#0000" Foreground="#393939" Click="btnHome_Click">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Home"/>
-                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Home" FontFamily="Segoe UI" FontSize="14"/>
+                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Home" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click" Background="#00B6B6B6">
+                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click" Background="#0000" Foreground="#393939">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Globe"/>
-                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Multiplayer" FontFamily="Segoe UI" FontSize="14"/>
+                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Multiplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    
+                    <Button x:Name="btnSingleplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}"  Background="#0000" Foreground="#393939" Click="btnSingleplayer_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="BlockContact"/>
+                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Singleplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <ScrollViewer>
-                    <Frame x:Name="ContentContainer" Padding="20,20"/>
+                    <Frame x:Name="ContentContainer"/>
                 </ScrollViewer>
             </SplitView.Content>
         </SplitView>

@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Data.SqlClient;
+using System.Drawing;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,15 +25,36 @@ namespace NoughtsAndCrossesApp
     public sealed partial class MultiplayerPage : Page
     {
         string connectionString = @"Server=tcp:mygameserver.database.windows.net,1433;Initial Catalog=noughtsandcrossesDb;Persist Security Info=False;User ID=adgold;Password=Gold1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        int gameId;
 
         public MultiplayerPage()
         {
             this.InitializeComponent();
+            
         }
 
-        public void JoinGame()
+        private async void JoinCodeDialog()
         {
-            int gameId = int.Parse(txtBoxGameId.Text);
+            TextBox dialogText = new TextBox();
+            dialogText.Height = 32;
+            dialogText.BorderThickness = new Thickness(1);
+            dialogText.FontSize = 18;
+            dialogText.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
+            ContentDialog joinCodeDialog = new ContentDialog();
+            joinCodeDialog.Title = "Enter Game Code";
+            joinCodeDialog.Content = dialogText;
+            joinCodeDialog.CloseButtonText = "Cancel";
+            joinCodeDialog.PrimaryButtonText = "Join";
+
+            ContentDialogResult result = await joinCodeDialog.ShowAsync();
+            if(result == ContentDialogResult.Primary)
+            {
+                gameId = int.Parse(dialogText.Text);
+                JoinGame();
+            }
+        }
+        public void JoinGame()
+        {            
             string result = "";
             int p2Result = 0;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -103,7 +125,7 @@ namespace NoughtsAndCrossesApp
 
         private void btnJoinGame_Click(object sender, RoutedEventArgs e)
         {
-            JoinGame();
+            JoinCodeDialog();
         }
 
         private void btnCreateGame_Click(object sender, RoutedEventArgs e)

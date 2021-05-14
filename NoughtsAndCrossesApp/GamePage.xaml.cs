@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Windows.UI;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -39,6 +40,8 @@ namespace NoughtsAndCrossesApp
         int S8;
         int S9;
         int i = 1;
+        int P1Score;
+        int P2Score;
 
         public GamePage()
         {
@@ -54,36 +57,7 @@ namespace NoughtsAndCrossesApp
                 await Task.Delay(1000);
                 UpdateBoardState(gameId);
             }
-        }
-
-        public void ActivePlayer(int gameId)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT P1Active, P2Active FROM gameState WHERE GameId = " + gameId + ";";
-                    using (SqlDataReader reader = command.ExecuteReader()) 
-                    { 
-                        while (reader.Read()) 
-                        { 
-                            P1Active = reader.GetInt32(0);
-                            P2Active = reader.GetInt32(1);
-                        } 
-                    }
-                    if (P1Active != 1)
-                    {                        
-                        command.CommandText = "UPDATE gameState SET P1Active = 1 WHERE GameId = " + gameId + ";";
-                        command.ExecuteReader();  
-                        P1Active = 1;
-                        txtBoxP1A.Text = "Player 1: Active";
-
-                    }
-                    if (P2Active == 1) txtBoxP1A.Text = "Player 2: Active"; else txtBoxP2A.Text = "Player 2: Not Active";
-                }
-            }            
-        }
+        }   
 
         public void UpdateBoardState(int gameId)
         {
@@ -109,9 +83,35 @@ namespace NoughtsAndCrossesApp
                             P1Active = reader.GetInt32(9);
                             P2Active = reader.GetInt32(10);
                             PlayersTurn = reader.GetInt32(11);
+
+                            if(S1 == 1 && S2 == 1 && S3 == 1 || S4 == 1 && S5 == 1 && S6 == 1 || S7 == 1 && S8 == 1 && S9 == 1 || S1 == 1 && S4 == 1 && S7 == 1 || S2 == 1 && S5 == 1 && S8 == 1 || S3 == 1 && S6 == 1 && S9 == 1 || S1 == 1 && S5 == 1 && S9 == 1 || S3 == 1 && S5 == 1 && S7 == 1)
+                            {
+                                txtBlockP1Score.Text = (P1Score += 1).ToString();
+                                
+                                command.CommandText = "UPDATE gameState SET S1 = 0, S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0 WHERE GameId = " + gameId + ";";
+                                command.ExecuteReader();                               
+                            }
+                            else if((S1 == 2 && S2 == 2 && S3 == 2 || S4 == 2 && S5 == 2 && S6 == 2 || S7 == 2 && S8 == 2 && S9 == 2 || S1 == 2 && S4 == 2 && S7 == 2 || S2 == 2 && S5 == 2 && S8 == 2 || S3 == 2 && S6 == 2 && S9 == 2 || S1 == 2 && S5 == 2 && S9 == 2 || S3 == 2 && S5 == 2 && S7 == 2))
+                            {
+                                txtBlockP1Score.Text = (P2Score += 1).ToString();
+
+                                command.CommandText = "UPDATE gameState SET S1 = 0, S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0 WHERE GameId = " + gameId + ";";
+                                command.ExecuteReader();
+                            }
                         } 
                     }                    
                 }
+            }
+
+            if(PlayersTurn == 1)
+            {
+                txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
+                txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
+            }
+            else
+            {
+                txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
+                txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
             }
             if (P1Active == 1 && P2Active == 1 && PlayersTurn == GameID.Player) {
                 if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = true; }
