@@ -20,8 +20,8 @@
             </TextBlock>
             <TextBlock Text="Face a Freind or vs an AI" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,20,0,0"/>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button Content="Multiplayer" BorderThickness="0" CornerRadius="2" Foreground="#393939" Background="#3DF31C" Margin="0,0,10,0" Padding="18,10"/>
-                <Button Content="Singleplayer" BorderThickness="0" CornerRadius="2" Foreground="#393939" Background="#e3e3e3" Margin="0,0,10,0" Padding="18,10"/>
+                <Button x:Name="btnMultiplayer" Content="Multiplayer" BorderThickness="0" CornerRadius="2" Foreground="#393939" Background="#3DF31C" Margin="0,0,10,0" Padding="18,10" Click="btnMultiplayer_Click"/>
+                <Button x:Name="btnSingleplayer" Content="Singleplayer" BorderThickness="0" CornerRadius="2" Foreground="#393939" Background="#e3e3e3" Margin="0,0,10,0" Padding="18,10" Click="btnSingleplayer_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

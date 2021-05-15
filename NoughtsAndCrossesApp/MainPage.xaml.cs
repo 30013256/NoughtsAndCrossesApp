@@ -56,7 +56,7 @@ namespace NoughtsAndCrossesApp
 
         private void btnSingleplayer_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentContainer.Navigate(typeof(SingleplayerPage));
         }
     }
 }

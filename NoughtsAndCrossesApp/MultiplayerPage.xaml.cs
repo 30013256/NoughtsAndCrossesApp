@@ -108,8 +108,8 @@ namespace NoughtsAndCrossesApp
                     }
                     if (result == "")
                     {
-                        command.CommandText = "INSERT INTO gameState(GameId, P1Active, P2Active, PlayersTurn, S1, S2, S3, S4, S5, S6, S7, S8, S9)" +
-                            " VALUES(" + gameId + ", 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
+                        command.CommandText = "INSERT INTO gameState(GameId, P1Active, P2Active, PlayersTurn, S1, S2, S3, S4, S5, S6, S7, S8, S9, P1Wins, P2Wins)" +
+                            " VALUES(" + gameId + ", 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
                         command.ExecuteReader();
                         GameID.GID = gameId;
                         GameID.Player = 1;

@@ -26,5 +26,15 @@ namespace NoughtsAndCrossesApp
         {
             this.InitializeComponent();
         }
+
+        private void btnMultiplayer_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MultiplayerPage));
+        }
+
+        private void btnSingleplayer_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SingleplayerPage));
+        }
     }
 }
