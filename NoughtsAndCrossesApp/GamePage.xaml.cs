@@ -85,8 +85,7 @@ namespace NoughtsAndCrossesApp
                             PlayersTurn = reader.GetInt32(11);
                             P1Score = reader.GetInt32(12);
                             P2Score = reader.GetInt32(13);
-                        }
-                       
+                        }                       
                     }
                     if (PlayersTurn == 1)
                     {
@@ -135,6 +134,11 @@ namespace NoughtsAndCrossesApp
                         command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0, P2Wins = " + P2Score + " WHERE GameId = " + gameId + ";";
                         command.ExecuteReader();                       
                     }
+                    else if(S1 != 0 && S2 != 0 && S3 != 0 && S4 != 0 && S5 != 0 && S6 != 0 && S7 != 0 && S8 != 0 && S9 != 0)
+                    {
+                        command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0 WHERE GameId = " + gameId + ";";
+                        command.ExecuteReader();
+                    }
                     txtBlockP1Score.Text = P1Score.ToString();
                     txtBlockP2Score.Text = P2Score.ToString();
                 }
@@ -142,10 +146,21 @@ namespace NoughtsAndCrossesApp
         }
 
         public void Move(int gameId, int s)
-        {
+        {     
+            btnSquare1.IsEnabled = false;
+            btnSquare2.IsEnabled = false;
+            btnSquare3.IsEnabled = false;
+            btnSquare4.IsEnabled = false; 
+            btnSquare5.IsEnabled = false; 
+            btnSquare6.IsEnabled = false; 
+            btnSquare7.IsEnabled = false;
+            btnSquare8.IsEnabled = false; 
+            btnSquare9.IsEnabled = false;
+            
             int nextMove;
             if (GameID.Player == 1) nextMove = 2;
             else nextMove = 1;
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
