@@ -36,15 +36,6 @@ namespace NoughtsAndCrossesApp
             ContentContainer.Navigate(typeof(HomePage));
         }
 
-        public void Theme()
-        {
-            var uiSettings = new Windows.UI.ViewManagement.UISettings();
-            var rgba = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
-            var cssColorString = "rgba(" + rgba.r + "," + rgba.g + "," + rgba.b + ", " + rgba.a + ")";
-
-            if(rgba.A >= 160)
-        }
-
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
         {
             AppTitleBar.Height = sender.Height;

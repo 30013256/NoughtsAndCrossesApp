@@ -21,12 +21,12 @@
         <SplitView x:Name="SplitViewMP" Grid.RowSpan="2" IsPaneOpen="True" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="{StaticResource AccentColor}">
             <SplitView.Pane>
                 <StackPanel>
-                    <Button x:Name="btnBack" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}">
+                    <Button x:Name="btnBack" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Back"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnTogglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}">
+                    <Button x:Name="btnTogglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="GlobalNavigationButton"/>
                         </StackPanel>
@@ -37,13 +37,13 @@
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Home" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click">
+                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Globe"/>
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Multiplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnSingleplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnSingleplayer_Click">
+                    <Button x:Name="btnSingleplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnSingleplayer_Click" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="BlockContact"/>
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Singleplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>

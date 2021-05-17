@@ -8,20 +8,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="#393939">
+    <Grid>
         <StackPanel Margin="30,50,10,0">
-            <TextBlock Text="Muliplayer" FontSize="50" Foreground="#e3e3e3" FontWeight="SemiBold"/>
+            <TextBlock Text="Muliplayer" Style="{ThemeResource HeaderTextBlockStyle}"/>
             <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                <Button x:Name="btnCreateGame" CornerRadius="10" BorderThickness="0" Margin="0,0,30,0" Click="btnCreateGame_Click" Height="280" Width="280" Background="#3DF31C">
+                <Button x:Name="btnCreateGame" CornerRadius="10" BorderThickness="0" Margin="0,0,30,0" Click="btnCreateGame_Click" Height="280" Width="280" Background="{ThemeResource SystemAccentColor}">
                     <StackPanel>
                         <Image Source="Assets/grid-3x3.png" Width="100" Height="100"/>
-                        <TextBlock Text="Create Game" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="#393939" FontSize="30" FontWeight="Bold"/>
+                        <TextBlock Text="Create Game" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="30" FontWeight="Bold" />
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnJoinGame" CornerRadius="10" BorderThickness="0" Margin="0,0,30,0" Click="btnJoinGame_Click" Height="280" Width="280" Background="#3DF31C">
+                <Button x:Name="btnJoinGame" CornerRadius="10" BorderThickness="0" Margin="0,0,30,0" Click="btnJoinGame_Click" Height="280" Width="280" Background="{ThemeResource SystemAccentColor}">
                     <StackPanel>
                         <Image Source="Assets/person-plus.png" Width="100" Height="100"/>
-                        <TextBlock Text="Join Game" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="#393939" FontSize="30" FontWeight="Bold"/>
+                        <TextBlock Text="Join Game" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="30" FontWeight="Bold"/>
                     </StackPanel>
                 </Button>
             </StackPanel>

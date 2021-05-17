@@ -5,21 +5,22 @@
     xmlns:local="using:NoughtsAndCrossesApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid Background="#393939">
+    <Grid>
         <StackPanel Margin="30,50,30,0">
-            <TextBlock x:Name="txtBoxGameId" Text="Game: 3492" FontSize="50" Foreground="#e3e3e3" FontWeight="SemiBold"/>
+            <TextBlock x:Name="txtBoxGameId" Text="Game: 3492" Style="{ThemeResource HeaderTextBlockStyle}"/>
             <StackPanel HorizontalAlignment="Center">
                 <Grid  HorizontalAlignment="Left" Width="560">
-                    <TextBlock x:Name="txtBlockP1" Text="Player1" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Left"/>
-                    <TextBlock Text="vs" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="txtBlockP2" Text="Player2" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="txtBlockP1" Text="Player1" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,20,0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="vs" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,20,0" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="txtBlockP2" Text="Player2" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid  HorizontalAlignment="Left" Width="560">
-                    <TextBlock x:Name="txtBlockP1Score" Text="0" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Left"/>
-                    <TextBlock Text="-" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" Margin="0,0,20,0" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="txtBlockP2Score" Text="0" FontSize="30" Foreground="#e3e3e3" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="txtBlockP1Score" Text="0" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,20,0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="-" Style="{ThemeResource SubheaderTextBlockStyle}" Margin="0,0,20,0" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="txtBlockP2Score" Text="0" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid Height="560" Width="560" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
@@ -40,14 +41,14 @@
                         <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Background="#3DF31C" Grid.Row="0" Grid.ColumnSpan="7"/>
-                    <Grid Background="#3DF31C" Grid.Row="2" Grid.ColumnSpan="7"/>
-                    <Grid Background="#3DF31C" Grid.Row="4" Grid.ColumnSpan="7"/>
-                    <Grid Background="#3DF31C" Grid.Row="6" Grid.ColumnSpan="7"/>
-                    <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="0"/>
-                    <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="2"/>
-                    <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="4"/>
-                    <Grid Background="#3DF31C" Grid.RowSpan="7" Grid.Column="6"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.Row="0" Grid.ColumnSpan="7"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.Row="2" Grid.ColumnSpan="7"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.Row="4" Grid.ColumnSpan="7"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.Row="6" Grid.ColumnSpan="7"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.RowSpan="7" Grid.Column="0"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.RowSpan="7" Grid.Column="2"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.RowSpan="7" Grid.Column="4"/>
+                    <Grid Background="{ThemeResource SystemAccentColor}" Grid.RowSpan="7" Grid.Column="6"/>
                     <Button x:Name="btnSquare1" Grid.Row="1" Grid.Column="1" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare1_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
                     <Button x:Name="btnSquare2" Grid.Row="1" Grid.Column="3" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare2_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
                     <Button x:Name="btnSquare3" Grid.Row="1" Grid.Column="5" IsEnabled="False" Content="" VerticalAlignment="Top" Height="180" Width="180" Click="btnSquare3_Click" BorderThickness="0" Background="#0000" Foreground="#e3e3e3" FontSize="100" Padding="0,0,0,20"/>
