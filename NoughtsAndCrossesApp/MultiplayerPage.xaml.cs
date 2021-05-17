@@ -53,7 +53,7 @@ namespace NoughtsAndCrossesApp
                 JoinGame();
             }
         }
-        public void JoinGame()
+        public async void JoinGame()
         {            
             string result = "";
             int p2Result = 0;
@@ -87,38 +87,52 @@ namespace NoughtsAndCrossesApp
             }
         }
 
-        public void CreateGame()
+        public async void CreateGame()
         {
-            Random rand = new Random();
-            int gameId = rand.Next(1000, 9999);
-            string result = "";
+            try { 
+                Random rand = new Random();
+                int gameId = rand.Next(1000, 9999);
+                string result = "";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.CommandText = "SELECT GameId FROM gameState WHERE GameId = " + gameId + ";";
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
                     {
-                        while (reader.Read())
+                        command.CommandText = "SELECT GameId FROM gameState WHERE GameId = " + gameId + ";";
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            result = reader.GetInt32(0).ToString();
+                            while (reader.Read())
+                            {
+                                result = reader.GetInt32(0).ToString();
+                            }
+                        }
+                        if (result == "")
+                        {
+                            command.CommandText = "INSERT INTO gameState(GameId, P1Active, P2Active, PlayersTurn, S1, S2, S3, S4, S5, S6, S7, S8, S9, P1Wins, P2Wins)" +
+                                " VALUES(" + gameId + ", 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
+                            command.ExecuteReader();
+                            GameID.GID = gameId;
+                            GameID.Player = 1;
+                            Frame.Navigate(typeof(GamePage));
+                        }
+                        else
+                        {
+                           CreateGame();
                         }
                     }
-                    if (result == "")
-                    {
-                        command.CommandText = "INSERT INTO gameState(GameId, P1Active, P2Active, PlayersTurn, S1, S2, S3, S4, S5, S6, S7, S8, S9, P1Wins, P2Wins)" +
-                            " VALUES(" + gameId + ", 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);";
-                        command.ExecuteReader();
-                        GameID.GID = gameId;
-                        GameID.Player = 1;
-                        Frame.Navigate(typeof(GamePage));
-                    }
-                    else
-                    {
-                       CreateGame();
-                    }
+                }    
+            }
+            catch (Exception ex)
+            {
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Error Creating Game";
+                joinCodeDialog.Content = ex;
+                joinCodeDialog.PrimaryButtonText = "Ok";
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(HomePage));
                 }
             }
         }

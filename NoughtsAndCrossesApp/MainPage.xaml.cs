@@ -25,18 +25,29 @@ namespace NoughtsAndCrossesApp
     {
         public MainPage()
         {
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = false;
+            
             this.InitializeComponent();
-            var appView = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView();
-            appView.TitleBar.BackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
-            appView.TitleBar.InactiveBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
-            appView.TitleBar.ButtonBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
-            appView.TitleBar.ButtonHoverBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 150, 243, 130);
-            appView.TitleBar.ButtonPressedBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
-            appView.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28);
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+            // Set XAML element as a draggable region.
+            Window.Current.SetTitleBar(AppTitleBar);
 
             ContentContainer.Navigate(typeof(HomePage));
+        }
+
+        public void Theme()
+        {
+            var uiSettings = new Windows.UI.ViewManagement.UISettings();
+            var rgba = uiSettings.GetColorValue(Windows.UI.ViewManagement.UIColorType.Accent);
+            var cssColorString = "rgba(" + rgba.r + "," + rgba.g + "," + rgba.b + ", " + rgba.a + ")";
+
+            if(rgba.A >= 160)
+        }
+
+        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            AppTitleBar.Height = sender.Height;
         }
 
         private void BtnTogglePane_Click(object sender, RoutedEventArgs e)

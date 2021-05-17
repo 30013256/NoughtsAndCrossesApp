@@ -5,30 +5,45 @@
     xmlns:local="using:NoughtsAndCrossesApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="#393939">
+    mc:Ignorable="d" Background="{ThemeResource SystemColorWindowBrush}">
 
+    <Page.Resources>
+        <SolidColorBrush x:Key="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
+    </Page.Resources>
+    
     <Grid>
-        <SplitView x:Name="SplitViewMP" IsPaneOpen="True" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="#3DF31C">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+       
+        <SplitView x:Name="SplitViewMP" Grid.RowSpan="2" IsPaneOpen="True" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="{StaticResource AccentColor}">
             <SplitView.Pane>
                 <StackPanel>
-                    <Button x:Name="btnTagglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Background="#0000" Foreground="#393939" Padding="10">
+                    <Button x:Name="btnBack" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Back"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnTogglePane" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="GlobalNavigationButton"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnHome" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Background="#0000" Foreground="#393939" Click="btnHome_Click" Padding="10">
+                    <Button x:Name="btnHome" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnHome_Click" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Home"/>
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Home" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click" Background="#0000" Foreground="#393939" Padding="10">
+                    <Button x:Name="btnMultiplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnMultiplayer_Click">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Globe"/>
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Multiplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="btnSingleplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}"  Background="#0000" Foreground="#393939" Click="btnSingleplayer_Click" Padding="10">
+                    <Button x:Name="btnSingleplayer" Width="200" HorizontalContentAlignment="Left" Style="{StaticResource  CustomButton}" Click="btnSingleplayer_Click">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="BlockContact"/>
                             <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Singleplayer" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
@@ -42,5 +57,6 @@
                 </ScrollViewer>
             </SplitView.Content>
         </SplitView>
+        <Grid x:Name="AppTitleBar" Background="Transparent" Margin="44,0,0,0"/>
     </Grid>
 </Page>

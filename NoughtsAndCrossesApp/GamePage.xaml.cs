@@ -59,88 +59,103 @@ namespace NoughtsAndCrossesApp
             }
         }   
 
-        public void UpdateBoardState(int gameId)
+        public async void UpdateBoardState(int gameId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
+            try
+            {           
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.CommandText = "SELECT S1, S2, S3, S4, S5, S6, S7, S8, S9, P1Active, P2Active, PlayersTurn, P1Wins, P2Wins FROM gameState WHERE GameId = " + gameId + ";";
-                    using (SqlDataReader reader = command.ExecuteReader()) 
-                    { 
-                        while (reader.Read()) 
-                        {    
-                            S1 = reader.GetInt32(0);
-                            S2 = reader.GetInt32(1);
-                            S3 = reader.GetInt32(2);
-                            S4 = reader.GetInt32(3);
-                            S5 = reader.GetInt32(4);
-                            S6 = reader.GetInt32(5);
-                            S7 = reader.GetInt32(6);
-                            S8 = reader.GetInt32(7);
-                            S9 = reader.GetInt32(8);
-                            P1Active = reader.GetInt32(9);
-                            P2Active = reader.GetInt32(10);
-                            PlayersTurn = reader.GetInt32(11);
-                            P1Score = reader.GetInt32(12);
-                            P2Score = reader.GetInt32(13);
-                        }                       
-                    }
-                    if (PlayersTurn == 1)
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
                     {
-                        txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
-                        txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
-                    }
-                    else
-                    {
-                        txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
-                        txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
-                    }
-                    if (P1Active == 1 && P2Active == 1 && PlayersTurn == GameID.Player)
-                    {
-                        if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = true; }
-                        if (S2 == 1) { btnSquare2.Content = "x"; btnSquare2.IsEnabled = false; } else if (S2 == 2) { btnSquare2.Content = "o"; btnSquare2.IsEnabled = false; } else { btnSquare2.Content = ""; btnSquare2.IsEnabled = true; }
-                        if (S3 == 1) { btnSquare3.Content = "x"; btnSquare3.IsEnabled = false; } else if (S3 == 2) { btnSquare3.Content = "o"; btnSquare3.IsEnabled = false; } else { btnSquare3.Content = ""; btnSquare3.IsEnabled = true; }
-                        if (S4 == 1) { btnSquare4.Content = "x"; btnSquare4.IsEnabled = false; } else if (S4 == 2) { btnSquare4.Content = "o"; btnSquare4.IsEnabled = false; } else { btnSquare4.Content = ""; btnSquare4.IsEnabled = true; }
-                        if (S5 == 1) { btnSquare5.Content = "x"; btnSquare5.IsEnabled = false; } else if (S5 == 2) { btnSquare5.Content = "o"; btnSquare5.IsEnabled = false; } else { btnSquare5.Content = ""; btnSquare5.IsEnabled = true; }
-                        if (S6 == 1) { btnSquare6.Content = "x"; btnSquare6.IsEnabled = false; } else if (S6 == 2) { btnSquare6.Content = "o"; btnSquare6.IsEnabled = false; } else { btnSquare6.Content = ""; btnSquare6.IsEnabled = true; }
-                        if (S7 == 1) { btnSquare7.Content = "x"; btnSquare7.IsEnabled = false; } else if (S7 == 2) { btnSquare7.Content = "o"; btnSquare7.IsEnabled = false; } else { btnSquare7.Content = ""; btnSquare7.IsEnabled = true; }
-                        if (S8 == 1) { btnSquare8.Content = "x"; btnSquare8.IsEnabled = false; } else if (S8 == 2) { btnSquare8.Content = "o"; btnSquare8.IsEnabled = false; } else { btnSquare8.Content = ""; btnSquare8.IsEnabled = true; }
-                        if (S9 == 1) { btnSquare9.Content = "x"; btnSquare9.IsEnabled = false; } else if (S9 == 2) { btnSquare9.Content = "o"; btnSquare9.IsEnabled = false; } else { btnSquare9.Content = ""; btnSquare9.IsEnabled = true; }
-                    }
-                    else
-                    {
-                        if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = false; }
-                        if (S2 == 1) { btnSquare2.Content = "x"; btnSquare2.IsEnabled = false; } else if (S2 == 2) { btnSquare2.Content = "o"; btnSquare2.IsEnabled = false; } else { btnSquare2.Content = ""; btnSquare2.IsEnabled = false; }
-                        if (S3 == 1) { btnSquare3.Content = "x"; btnSquare3.IsEnabled = false; } else if (S3 == 2) { btnSquare3.Content = "o"; btnSquare3.IsEnabled = false; } else { btnSquare3.Content = ""; btnSquare3.IsEnabled = false; }
-                        if (S4 == 1) { btnSquare4.Content = "x"; btnSquare4.IsEnabled = false; } else if (S4 == 2) { btnSquare4.Content = "o"; btnSquare4.IsEnabled = false; } else { btnSquare4.Content = ""; btnSquare4.IsEnabled = false; }
-                        if (S5 == 1) { btnSquare5.Content = "x"; btnSquare5.IsEnabled = false; } else if (S5 == 2) { btnSquare5.Content = "o"; btnSquare5.IsEnabled = false; } else { btnSquare5.Content = ""; btnSquare5.IsEnabled = false; }
-                        if (S6 == 1) { btnSquare6.Content = "x"; btnSquare6.IsEnabled = false; } else if (S6 == 2) { btnSquare6.Content = "o"; btnSquare6.IsEnabled = false; } else { btnSquare6.Content = ""; btnSquare6.IsEnabled = false; }
-                        if (S7 == 1) { btnSquare7.Content = "x"; btnSquare7.IsEnabled = false; } else if (S7 == 2) { btnSquare7.Content = "o"; btnSquare7.IsEnabled = false; } else { btnSquare7.Content = ""; btnSquare7.IsEnabled = false; }
-                        if (S8 == 1) { btnSquare8.Content = "x"; btnSquare8.IsEnabled = false; } else if (S8 == 2) { btnSquare8.Content = "o"; btnSquare8.IsEnabled = false; } else { btnSquare8.Content = ""; btnSquare8.IsEnabled = false; }
-                        if (S9 == 1) { btnSquare9.Content = "x"; btnSquare9.IsEnabled = false; } else if (S9 == 2) { btnSquare9.Content = "o"; btnSquare9.IsEnabled = false; } else { btnSquare9.Content = ""; btnSquare9.IsEnabled = false; }
-                    }
+                        command.CommandText = "SELECT S1, S2, S3, S4, S5, S6, S7, S8, S9, P1Active, P2Active, PlayersTurn, P1Wins, P2Wins FROM gameState WHERE GameId = " + gameId + ";";
+                        using (SqlDataReader reader = command.ExecuteReader()) 
+                        { 
+                            while (reader.Read()) 
+                            {    
+                                S1 = reader.GetInt32(0);
+                                S2 = reader.GetInt32(1);
+                                S3 = reader.GetInt32(2);
+                                S4 = reader.GetInt32(3);
+                                S5 = reader.GetInt32(4);
+                                S6 = reader.GetInt32(5);
+                                S7 = reader.GetInt32(6);
+                                S8 = reader.GetInt32(7);
+                                S9 = reader.GetInt32(8);
+                                P1Active = reader.GetInt32(9);
+                                P2Active = reader.GetInt32(10);
+                                PlayersTurn = reader.GetInt32(11);
+                                P1Score = reader.GetInt32(12);
+                                P2Score = reader.GetInt32(13);
+                            }                       
+                        }
+                        if (PlayersTurn == 1)
+                        {
+                            txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
+                            txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
+                        }
+                        else
+                        {
+                            txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
+                            txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
+                        }
+                        if (P1Active == 1 && P2Active == 1 && PlayersTurn == GameID.Player)
+                        {
+                            if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = true; }
+                            if (S2 == 1) { btnSquare2.Content = "x"; btnSquare2.IsEnabled = false; } else if (S2 == 2) { btnSquare2.Content = "o"; btnSquare2.IsEnabled = false; } else { btnSquare2.Content = ""; btnSquare2.IsEnabled = true; }
+                            if (S3 == 1) { btnSquare3.Content = "x"; btnSquare3.IsEnabled = false; } else if (S3 == 2) { btnSquare3.Content = "o"; btnSquare3.IsEnabled = false; } else { btnSquare3.Content = ""; btnSquare3.IsEnabled = true; }
+                            if (S4 == 1) { btnSquare4.Content = "x"; btnSquare4.IsEnabled = false; } else if (S4 == 2) { btnSquare4.Content = "o"; btnSquare4.IsEnabled = false; } else { btnSquare4.Content = ""; btnSquare4.IsEnabled = true; }
+                            if (S5 == 1) { btnSquare5.Content = "x"; btnSquare5.IsEnabled = false; } else if (S5 == 2) { btnSquare5.Content = "o"; btnSquare5.IsEnabled = false; } else { btnSquare5.Content = ""; btnSquare5.IsEnabled = true; }
+                            if (S6 == 1) { btnSquare6.Content = "x"; btnSquare6.IsEnabled = false; } else if (S6 == 2) { btnSquare6.Content = "o"; btnSquare6.IsEnabled = false; } else { btnSquare6.Content = ""; btnSquare6.IsEnabled = true; }
+                            if (S7 == 1) { btnSquare7.Content = "x"; btnSquare7.IsEnabled = false; } else if (S7 == 2) { btnSquare7.Content = "o"; btnSquare7.IsEnabled = false; } else { btnSquare7.Content = ""; btnSquare7.IsEnabled = true; }
+                            if (S8 == 1) { btnSquare8.Content = "x"; btnSquare8.IsEnabled = false; } else if (S8 == 2) { btnSquare8.Content = "o"; btnSquare8.IsEnabled = false; } else { btnSquare8.Content = ""; btnSquare8.IsEnabled = true; }
+                            if (S9 == 1) { btnSquare9.Content = "x"; btnSquare9.IsEnabled = false; } else if (S9 == 2) { btnSquare9.Content = "o"; btnSquare9.IsEnabled = false; } else { btnSquare9.Content = ""; btnSquare9.IsEnabled = true; }
+                        }
+                        else
+                        {
+                            if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = false; }
+                            if (S2 == 1) { btnSquare2.Content = "x"; btnSquare2.IsEnabled = false; } else if (S2 == 2) { btnSquare2.Content = "o"; btnSquare2.IsEnabled = false; } else { btnSquare2.Content = ""; btnSquare2.IsEnabled = false; }
+                            if (S3 == 1) { btnSquare3.Content = "x"; btnSquare3.IsEnabled = false; } else if (S3 == 2) { btnSquare3.Content = "o"; btnSquare3.IsEnabled = false; } else { btnSquare3.Content = ""; btnSquare3.IsEnabled = false; }
+                            if (S4 == 1) { btnSquare4.Content = "x"; btnSquare4.IsEnabled = false; } else if (S4 == 2) { btnSquare4.Content = "o"; btnSquare4.IsEnabled = false; } else { btnSquare4.Content = ""; btnSquare4.IsEnabled = false; }
+                            if (S5 == 1) { btnSquare5.Content = "x"; btnSquare5.IsEnabled = false; } else if (S5 == 2) { btnSquare5.Content = "o"; btnSquare5.IsEnabled = false; } else { btnSquare5.Content = ""; btnSquare5.IsEnabled = false; }
+                            if (S6 == 1) { btnSquare6.Content = "x"; btnSquare6.IsEnabled = false; } else if (S6 == 2) { btnSquare6.Content = "o"; btnSquare6.IsEnabled = false; } else { btnSquare6.Content = ""; btnSquare6.IsEnabled = false; }
+                            if (S7 == 1) { btnSquare7.Content = "x"; btnSquare7.IsEnabled = false; } else if (S7 == 2) { btnSquare7.Content = "o"; btnSquare7.IsEnabled = false; } else { btnSquare7.Content = ""; btnSquare7.IsEnabled = false; }
+                            if (S8 == 1) { btnSquare8.Content = "x"; btnSquare8.IsEnabled = false; } else if (S8 == 2) { btnSquare8.Content = "o"; btnSquare8.IsEnabled = false; } else { btnSquare8.Content = ""; btnSquare8.IsEnabled = false; }
+                            if (S9 == 1) { btnSquare9.Content = "x"; btnSquare9.IsEnabled = false; } else if (S9 == 2) { btnSquare9.Content = "o"; btnSquare9.IsEnabled = false; } else { btnSquare9.Content = ""; btnSquare9.IsEnabled = false; }
+                        }
 
-                    if (S1 == 1 && S2 == 1 && S3 == 1 || S4 == 1 && S5 == 1 && S6 == 1 || S7 == 1 && S8 == 1 && S9 == 1 || S1 == 1 && S4 == 1 && S7 == 1 || S2 == 1 && S5 == 1 && S8 == 1 || S3 == 1 && S6 == 1 && S9 == 1 || S1 == 1 && S5 == 1 && S9 == 1 || S3 == 1 && S5 == 1 && S7 == 1)
-                    {
-                        P1Score += 1;         
-                        command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0, P1Wins = " + P1Score + " WHERE GameId = " + gameId + ";";
-                        command.ExecuteReader();                       
+                        if (S1 == 1 && S2 == 1 && S3 == 1 || S4 == 1 && S5 == 1 && S6 == 1 || S7 == 1 && S8 == 1 && S9 == 1 || S1 == 1 && S4 == 1 && S7 == 1 || S2 == 1 && S5 == 1 && S8 == 1 || S3 == 1 && S6 == 1 && S9 == 1 || S1 == 1 && S5 == 1 && S9 == 1 || S3 == 1 && S5 == 1 && S7 == 1)
+                        {
+                            P1Score += 1;         
+                            command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0, P1Wins = " + P1Score + " WHERE GameId = " + gameId + ";";
+                            command.ExecuteReader();                       
+                        }
+                        else if ((S1 == 2 && S2 == 2 && S3 == 2 || S4 == 2 && S5 == 2 && S6 == 2 || S7 == 2 && S8 == 2 && S9 == 2 || S1 == 2 && S4 == 2 && S7 == 2 || S2 == 2 && S5 == 2 && S8 == 2 || S3 == 2 && S6 == 2 && S9 == 2 || S1 == 2 && S5 == 2 && S9 == 2 || S3 == 2 && S5 == 2 && S7 == 2))
+                        {
+                            P2Score += 1;
+                            command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0, P2Wins = " + P2Score + " WHERE GameId = " + gameId + ";";
+                            command.ExecuteReader();                       
+                        }
+                        else if(S1 != 0 && S2 != 0 && S3 != 0 && S4 != 0 && S5 != 0 && S6 != 0 && S7 != 0 && S8 != 0 && S9 != 0)
+                        {
+                            command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0 WHERE GameId = " + gameId + ";";
+                            command.ExecuteReader();
+                        }
+                        txtBlockP1Score.Text = P1Score.ToString();
+                        txtBlockP2Score.Text = P2Score.ToString();
                     }
-                    else if ((S1 == 2 && S2 == 2 && S3 == 2 || S4 == 2 && S5 == 2 && S6 == 2 || S7 == 2 && S8 == 2 && S9 == 2 || S1 == 2 && S4 == 2 && S7 == 2 || S2 == 2 && S5 == 2 && S8 == 2 || S3 == 2 && S6 == 2 && S9 == 2 || S1 == 2 && S5 == 2 && S9 == 2 || S3 == 2 && S5 == 2 && S7 == 2))
-                    {
-                        P2Score += 1;
-                        command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0, P2Wins = " + P2Score + " WHERE GameId = " + gameId + ";";
-                        command.ExecuteReader();                       
-                    }
-                    else if(S1 != 0 && S2 != 0 && S3 != 0 && S4 != 0 && S5 != 0 && S6 != 0 && S7 != 0 && S8 != 0 && S9 != 0)
-                    {
-                        command.CommandText = "UPDATE gameState SET S1 = 0, S2 = 0, S3 = 0, S4 = 0, S5 = 0, S6 = 0, S7 = 0, S8 = 0, S9 = 0 WHERE GameId = " + gameId + ";";
-                        command.ExecuteReader();
-                    }
-                    txtBlockP1Score.Text = P1Score.ToString();
-                    txtBlockP2Score.Text = P2Score.ToString();
+                }
+            }
+            catch(Exception ex)
+            {               
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Error Updating Board State";
+                joinCodeDialog.Content = ex;
+                joinCodeDialog.PrimaryButtonText = "Ok";
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(HomePage));
                 }
             }
         }
