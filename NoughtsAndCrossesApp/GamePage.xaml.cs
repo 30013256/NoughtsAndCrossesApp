@@ -89,6 +89,7 @@ namespace NoughtsAndCrossesApp
                                 P2Score = reader.GetInt32(13);
                             }                       
                         }
+
                         if (PlayersTurn == 1)
                         {
                             txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
@@ -99,6 +100,7 @@ namespace NoughtsAndCrossesApp
                             txtBlockP2.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 61, 243, 28));
                             txtBlockP1.Foreground = new SolidColorBrush(Windows.UI.ColorHelper.FromArgb(255, 227, 227, 227));
                         }
+
                         if (P1Active == 1 && P2Active == 1 && PlayersTurn == GameID.Player)
                         {
                             if (S1 == 1) { btnSquare1.Content = "x"; btnSquare1.IsEnabled = false; } else if (S1 == 2) { btnSquare1.Content = "o"; btnSquare1.IsEnabled = false; } else { btnSquare1.Content = ""; btnSquare1.IsEnabled = true; }
@@ -146,8 +148,8 @@ namespace NoughtsAndCrossesApp
                     }
                 }
             }
-            catch(Exception ex)
-            {               
+            catch (Exception ex)
+            {
                 ContentDialog joinCodeDialog = new ContentDialog();
                 joinCodeDialog.Title = "Error Updating Board State";
                 joinCodeDialog.Content = ex;
@@ -160,84 +162,108 @@ namespace NoughtsAndCrossesApp
             }
         }
 
-        public void Move(int gameId, int s)
-        {     
-            btnSquare1.IsEnabled = false;
-            btnSquare2.IsEnabled = false;
-            btnSquare3.IsEnabled = false;
-            btnSquare4.IsEnabled = false; 
-            btnSquare5.IsEnabled = false; 
-            btnSquare6.IsEnabled = false; 
-            btnSquare7.IsEnabled = false;
-            btnSquare8.IsEnabled = false; 
-            btnSquare9.IsEnabled = false;
-            
-            int nextMove;
-            if (GameID.Player == 1) nextMove = 2;
-            else nextMove = 1;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+        public async void Move(int gameId, int s, Button btn)
+        {
+            try
             {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
-                {     
-                    command.CommandText = "UPDATE gameState SET S" + s + " = " + GameID.Player + ", PlayersTurn = " + nextMove + " WHERE GameId = " + gameId + ";";
-                    command.ExecuteReader(); 
+                int nextMove;
+                
+                btnSquare1.IsEnabled = false;
+                btnSquare2.IsEnabled = false;
+                btnSquare3.IsEnabled = false;
+                btnSquare4.IsEnabled = false; 
+                btnSquare5.IsEnabled = false; 
+                btnSquare6.IsEnabled = false; 
+                btnSquare7.IsEnabled = false;
+                btnSquare8.IsEnabled = false; 
+                btnSquare9.IsEnabled = false;
+      
+                if (GameID.Player == 1) 
+                { 
+                    nextMove = 2;
+                    btn.Content = "x";
+                }
+                else 
+                { 
+                    nextMove = 1;
+                    btn.Content = "o";
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {     
+                        command.CommandText = "UPDATE gameState SET S" + s + " = " + GameID.Player + ", PlayersTurn = " + nextMove + " WHERE GameId = " + gameId + ";";
+                        command.ExecuteReader(); 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Error Making Move";
+                joinCodeDialog.Content = ex;
+                joinCodeDialog.PrimaryButtonText = "Ok";
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(HomePage));
                 }
             }
         }
 
         private void btnSquare1_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 1);
+            Move(gameId, 1, btnSquare1);
             S1 = GameID.Player;
         }
 
         private void btnSquare2_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 2);
+            Move(gameId, 2, btnSquare2);
             S2 = GameID.Player;
         }
 
         private void btnSquare3_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 3);
+            Move(gameId, 3, btnSquare3);
             S3 = GameID.Player;
         }
 
         private void btnSquare4_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 4);
+            Move(gameId, 4, btnSquare4);
             S4 = GameID.Player;
         }
 
         private void btnSquare5_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 5);
+            Move(gameId, 5, btnSquare5);
             S5 = GameID.Player;
         }
 
         private void btnSquare6_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 6);
+            Move(gameId, 6, btnSquare6);
             S6 = GameID.Player;
         }
 
         private void btnSquare7_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 7);
+            Move(gameId, 7, btnSquare7);
             S7 = GameID.Player;
         }
 
         private void btnSquare8_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 8);
+            Move(gameId, 8, btnSquare8);
             S8 = GameID.Player;
         }
 
         private void btnSquare9_Click(object sender, RoutedEventArgs e)
         {
-            Move(gameId, 9);
+            Move(gameId, 9, btnSquare9);
             S9 = GameID.Player;
         }     
     }

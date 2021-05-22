@@ -19,20 +19,21 @@ using Windows.UI.Xaml.Navigation;
 namespace NoughtsAndCrossesApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Main Page of app provides navigtion
     /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
-        {
-            
+        {           
             this.InitializeComponent();
+
+            //Romove Title Bar
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
+            //Set Dragable Region
             coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
-            // Set XAML element as a draggable region.
             Window.Current.SetTitleBar(AppTitleBar);
-
+            //Load Home Page
             ContentContainer.Navigate(typeof(HomePage));
         }
 
@@ -44,6 +45,14 @@ namespace NoughtsAndCrossesApp
         private void BtnTogglePane_Click(object sender, RoutedEventArgs e)
         {
             SplitViewMP.IsPaneOpen ^= true;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (ContentContainer.CanGoBack)
+            {
+                ContentContainer.GoBack();
+            }
         }
 
         private void btnMultiplayer_Click(object sender, RoutedEventArgs e)
@@ -59,6 +68,11 @@ namespace NoughtsAndCrossesApp
         private void btnSingleplayer_Click(object sender, RoutedEventArgs e)
         {
             ContentContainer.Navigate(typeof(SingleplayerPage));
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ContentContainer.Navigate(typeof(SettingsPage));
         }
     }
 }

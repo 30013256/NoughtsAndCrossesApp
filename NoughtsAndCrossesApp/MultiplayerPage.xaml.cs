@@ -35,54 +35,85 @@ namespace NoughtsAndCrossesApp
 
         private async void JoinCodeDialog()
         {
-            TextBox dialogText = new TextBox();
-            dialogText.Height = 32;
-            dialogText.BorderThickness = new Thickness(1);
-            dialogText.FontSize = 18;
-            dialogText.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
-            ContentDialog joinCodeDialog = new ContentDialog();
-            joinCodeDialog.Title = "Enter Game Code";
-            joinCodeDialog.Content = dialogText;
-            joinCodeDialog.CloseButtonText = "Cancel";
-            joinCodeDialog.PrimaryButtonText = "Join";
+            try 
+            { 
+                TextBox dialogText = new TextBox();
+                dialogText.Height = 32;
+                dialogText.BorderThickness = new Thickness(1);
+                dialogText.FontSize = 18;
+                dialogText.FontWeight = Windows.UI.Text.FontWeights.SemiBold;
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Enter Game Code";
+                joinCodeDialog.Content = dialogText;
+                joinCodeDialog.CloseButtonText = "Cancel";
+                joinCodeDialog.PrimaryButtonText = "Join";
 
-            ContentDialogResult result = await joinCodeDialog.ShowAsync();
-            if(result == ContentDialogResult.Primary)
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if(result == ContentDialogResult.Primary)
+                {
+                    gameId = int.Parse(dialogText.Text);
+                    JoinGame();
+                }
+            }
+            catch (Exception ex)
             {
-                gameId = int.Parse(dialogText.Text);
-                JoinGame();
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Error Joining Game";
+                joinCodeDialog.Content = ex;
+                joinCodeDialog.PrimaryButtonText = "Ok";
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(HomePage));
+                }
             }
         }
+
         public async void JoinGame()
-        {            
-            string result = "";
-            int p2Result = 0;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
             {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand())
+                string result = "";
+                int p2Result = 0;
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    command.CommandText = "SELECT GameId, P2Active FROM gameState WHERE GameId = " + gameId + ";";
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
                     {
-                        while (reader.Read())
+                        command.CommandText = "SELECT GameId, P2Active FROM gameState WHERE GameId = " + gameId + ";";
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            result = reader.GetInt32(0).ToString();
-                            p2Result = reader.GetInt32(1);
+                            while (reader.Read())
+                            {
+                                result = reader.GetInt32(0).ToString();
+                                p2Result = reader.GetInt32(1);
+                            }
+                        }
+                        if (result != "" && p2Result == 0)
+                        {
+                            command.CommandText = "UPDATE gameState SET P2Active = '1' WHERE GameId = " + gameId + ";";
+                            command.ExecuteReader();
+                            GameID.GID = gameId;
+                            GameID.Player = 2;
+                            Frame.Navigate(typeof(GamePage));
+                        }
+                        else
+                        {
+
                         }
                     }
-                    if (result != "" && p2Result == 0)
-                    {
-                        command.CommandText = "UPDATE gameState SET P2Active = '1' WHERE GameId = " + gameId + ";";
-                        command.ExecuteReader();
-                        GameID.GID = gameId;
-                        GameID.Player = 2;
-                        Frame.Navigate(typeof(GamePage));
-                    }
-                    else
-                    {
-                        
-                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ContentDialog joinCodeDialog = new ContentDialog();
+                joinCodeDialog.Title = "Error Joining Game";
+                joinCodeDialog.Content = ex;
+                joinCodeDialog.PrimaryButtonText = "Ok";
+                ContentDialogResult result = await joinCodeDialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    Frame.Navigate(typeof(HomePage));
                 }
             }
         }
@@ -146,7 +177,5 @@ namespace NoughtsAndCrossesApp
         {
             CreateGame();
         }
-
-
     }
 }

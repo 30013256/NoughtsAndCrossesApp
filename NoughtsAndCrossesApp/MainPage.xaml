@@ -5,23 +5,19 @@
     xmlns:local="using:NoughtsAndCrossesApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="{ThemeResource SystemColorWindowBrush}">
+    mc:Ignorable="d">
 
-    <Page.Resources>
-        <SolidColorBrush x:Key="AccentColor" Color="{ThemeResource SystemAccentColor}"/>
-    </Page.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-       
-        <SplitView x:Name="SplitViewMP" Grid.RowSpan="2" IsPaneOpen="True" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="{StaticResource AccentColor}">
+        <SplitView x:Name="SplitViewMP" Grid.RowSpan="2" IsPaneOpen="True" OpenPaneLength="200" CompactPaneLength="40" DisplayMode="CompactInline" PaneBackground="{StaticResource SystemAccentColor}">
             <SplitView.Pane>
+                <Grid>
                 <StackPanel>
-                    <Button x:Name="btnBack" Click="BtnTogglePane_Click" Style="{StaticResource  CustomButton}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}">
+                    <Button x:Name="btnBack" Style="{StaticResource  CustomButton}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}" Click="btnBack_Click" IsEnabled="{x:Bind ContentContainer.CanGoBack, Mode=OneWay}">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Back"/>
                         </StackPanel>
@@ -50,6 +46,15 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button x:Name="btnSettings" Width="200" HorizontalContentAlignment="Left" VerticalAlignment="Bottom" Style="{StaticResource  CustomButton}" Foreground="{ThemeResource AppBarItemForegroundThemeBrush}" Click="btnSettings_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Setting"/>
+                            <TextBlock Margin="10,0" VerticalAlignment="Center" Text="Settings" FontFamily="Segoe UI" FontSize="16" FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                </Grid>
             </SplitView.Pane>
             <SplitView.Content>
                 <ScrollViewer>

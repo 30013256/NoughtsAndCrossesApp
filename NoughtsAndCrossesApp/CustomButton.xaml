@@ -3,9 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Thickness x:Key="CustomButtonBorderThemeThickness">0</Thickness>
-    <SolidColorBrush x:Key="ButtonPointerOverBackgroundThemeBrush" Color="#6fff"/>
-    <SolidColorBrush x:Key="ButtonPointerOverForegroundThemeBrush" Color="#393939"/>
-    <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="#e3e3e3"/>
+    <SolidColorBrush x:Key="ButtonPointerOverBackgroundThemeBrush" Color="{StaticResource SystemAccentColorLight2}"/>
+    <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="{StaticResource SystemAccentColorLight3}"/>
     
     <!-- Default style for Windows.UI.Xaml.Controls.Button -->
     <Style TargetType="Button" x:Key="CustomButton">
